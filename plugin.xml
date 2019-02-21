@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.chinact.mobile.plugin.baidulocation" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>BaiduLocation</name>
+	<js-module name="BaiduLocation" src="www/BaiduLocation.js">
+		<clobbers target="navigator.baidulocation" />
+	</js-module>
+	<preference name="ANDROID_KEY" default=""/>
+    <preference name="IOS_KEY" default=""/>
+    <preference name="IOS_LOCATION_DESC" default="请点击'好'以允许访问"/>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="BaiduLocation">
+				<param name="android-package" value="com.chinact.mobile.plugin.baidulocation.BaiduLocation" />
+			</feature>
+		</config-file>
+		<config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.INTERNET" />
+        </config-file>
+        <config-file parent="/manifest/application" target="AndroidManifest.xml" >
+            <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote" />
+            <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="$ANDROID_KEY" />
+        </config-file>
+		<source-file src="src/android/BaiduLocation.java" target-dir="src/com/chinact/mobile/plugin/baidulocation" />
+        <source-file src="src/android/libs/armeabi/libindoor.so" target-dir="jniLibs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/liblocSDK7b.so" target-dir="jniLibs/armeabi"/>
+        <source-file src="src/android/libs/armeabi-v7a/libindoor.so" target-dir="jniLibs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/liblocSDK7b.so" target-dir="jniLibs/armeabi-v7a"/>
+        <source-file src="src/android/libs/arm64-v8a/libindoor.so" target-dir="jniLibs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/liblocSDK7b.so" target-dir="jniLibs/arm64-v8a"/>
+        <source-file src="src/android/libs/x86/libindoor.so" target-dir="jniLibs/x86"/>
+        <source-file src="src/android/libs/x86/liblocSDK7b.so" target-dir="jniLibs/x86"/>
+        <source-file src="src/android/libs/x86_64/libindoor.so" target-dir="jniLibs/x86_64"/>
+        <source-file src="src/android/libs/x86_64/liblocSDK7b.so" target-dir="jniLibs/x86_64"/>
+        <lib-file src="src/android/libs/BaiduLBS_Android.jar" />
+	</platform>
+	<platform name="ios">
+		<config-file parent="/*" target="config.xml">
+			<feature name="BaiduLocation">
+				<param name="ios-package" value="BaiduLocation" />
+			</feature>
+		</config-file>
+        <config-file parent="NSAppTransportSecurity" target="*-Info.plist">
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true />
+            </dict>
+        </config-file>
+        <config-file parent="NSLocationWhenInUseUsageDescription" target="*-Info.plist">
+            <string>$IOS_LOCATION_DESC</string>
+        </config-file>
+        <config-file parent="BaiduMapLocation" target="*-Info.plist">
+            <dict>
+                <key>IOS_KEY</key>
+                <string>$IOS_KEY</string>
+            </dict>
+        </config-file>
+        <framework src="CoreLocation.framework"/>
+        <framework src="SystemConfiguration.framework"/>
+        <framework src="libsqlite3.0.tbd"/>
+        <framework src="CoreTelephony.framework"/>
+        <framework src="src/ios/libs/BaiduMapAPI_Base.framework" custom="true"/>
+        <framework src="src/ios/libs/BaiduMapAPI_Location.framework" custom="true"/>
+        <framework src="src/ios/libs/BaiduMapAPI_Search.framework" custom="true"/>
+        <source-file src="src/ios/libs/thirdlibs/libcrypto.a" framework="true"/>
+        <source-file src="src/ios/libs/thirdlibs/libssl.a" framework="true"/>
+        <source-file src="src/ios/BaiduLocation.h" />
+        <source-file src="src/ios/BaiduLocation.mm" />
+	</platform>
+</plugin>

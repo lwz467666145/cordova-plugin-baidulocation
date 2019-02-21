@@ -1,0 +1,19 @@
+{
+  "name": "com.chinact.mobile.plugin.baidulocation",
+  "version": "1.0.0",
+  "description": "Baidu Map Location",
+  "cordova": {
+    "id": "com.chinact.mobile.plugin.baidulocation",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Dante Lee",
+  "license": "ISC"
+}
