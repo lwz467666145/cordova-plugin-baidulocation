@@ -4,7 +4,7 @@
 Baidu Map Location
 
 # Install
-cordova plugin add https://github.com/lwz467666145/cordova-plugin-baidulocation.git
+cordova plugin add https://github.com/lwz467666145/cordova-plugin-baidulocation.git --variable ANDROID_KEY="<API_KEY_ANDROID>" --variable IOS_KEY="<API_KEY_IOS>"
 
 # Use
 
